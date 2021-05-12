@@ -1,15 +1,25 @@
-#map{ margin: auto;
+#map{
+	margin: auto;
 	width: 60%;
 	height: 70%;
 	border: 3px solid #73AD21;
-	padding: 10px;}
+	padding: 10px;
+}
 
-.heading{margin: auto;
-		 width: 60%}
+.heading{
+	margin: auto;
+	width: 60%;
+}
 
-h2 {text-align: center;}
+h2{
+	text-align: center;
+}
 
-.info {
+div{
+	text-align: center;
+}
+
+.info{
 	padding: 6px 8px;
 	font: 14px/16px Arial, Helvetica, sans-serif;
 	background: white;
@@ -18,7 +28,32 @@ h2 {text-align: center;}
 	border-radius: 5px;
 }
 
-.info h4 {
+.info h4{
 	margin: 0 0 5px;
 	color: #777;
+}
+
+.button{
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.go_to_india{
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+
+.go_to_india:hover {
+  background-color: #555555;
+  color: white;
 }
