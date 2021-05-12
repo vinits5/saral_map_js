@@ -3,7 +3,7 @@
 		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 		<meta content="utf-8" http-equiv="encoding">
 		<title>A Leaflet map!</title>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="./css/main.css">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
 		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,81 +13,9 @@
 		<h2 class="heading">Leaflet Map</h2>
 		<h2></h2>
 		<div id="map"></div>
-		<script>
-			// initialize the map
-			var map = L.map('map').setView([20, 80], 4);
-
-		 //  	// load a tile layer
-			L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-				{
-					maxZoom: 17,
-					// minZoom: 9
-				}).addTo(map);
-		</script>
+		
+		<script src='./js/map.js'></script>
 		<script src="./datasets/india/india_state/india_state.js"></script>
-
-		<script>
-			var geojson;
-
-			var info = L.control();
-
-			info.onAdd = function (map) {
-				this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-				this.update();
-				return this._div;
-			};
-
-			// method that we will use to update the control based on feature properties passed
-			info.update = function (props) {
-				this._div.innerHTML = '<h4>State Details</h4>' +  (props ?
-					'<b>' + props.NAME_1 + '</b><br />'
-					: 'Hover over a state');
-			};
-
-			info.addTo(map);
-
-			function zoomToFeature(e) {
-				map.fitBounds(e.target.getBounds());
-				var layer = e.target;
-				console.log(layer.feature.properties);
-			}
-
-			function resetHighlight(e) {
-				geojson.resetStyle(e.target);
-				info.update();
-			}
-
-			function highlightFeature(e) {
-				var layer = e.target;
-
-				layer.setStyle({
-					weight: 2,
-					color: '#0000ff',
-					dashArray: '',
-					fillOpacity: 0.7
-				});
-
-				if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-					layer.bringToFront();
-				}
-
-				info.update(layer.feature.properties);
-			}
-
-			function onEachFeature(feature, layer) {
-				layer.on({
-					mouseover: highlightFeature,
-					mouseout: resetHighlight,
-					click: zoomToFeature,
-				});
-			}
-
-			geojson = L.geoJSON(indianStates, {style: function(feature) {
-					return {weight: 1, color: "#ff0000"};
-					},
-					onEachFeature: onEachFeature
-				}).addTo(map);
-		</script>
+		<script src='./js/india_states.js'></script>
 	</body>
 </html>
-	
