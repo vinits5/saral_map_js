@@ -12,7 +12,10 @@ info.onAdd = function (map) {
 info.update = function (props) {
     this._div.innerHTML = '<h4>State Details</h4>' +  (props ?
         '<b>' + props.NAME_1 + '</b><br />'
-        : 'Hover over a state');
+        : 'Hover over a state<br />') + 
+        (props ? 
+        (props.NAME_2 == undefined ? "Hover over a district" : '<b>' + props.NAME_2 + '</b><br />') 
+        : '\nHover over a district');
 };
 
 info.addTo(map);
