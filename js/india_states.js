@@ -58,3 +58,8 @@ geojson = L.geoJSON(indianStates, {style: function(feature) {
         },
         onEachFeature: onEachFeature
     }).addTo(map);
+
+var stateList = [];
+for (let feature of indianStates[0].features){
+    stateList.push(feature.properties.NAME_1);
+}
