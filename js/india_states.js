@@ -20,7 +20,7 @@ info.addTo(map);
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
     var layer = e.target;
-    console.log(layer.feature.properties);
+    openDistrictsMap(layer.feature.properties.NAME_1);
 }
 
 function resetHighlight(e) {
