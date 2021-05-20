@@ -41,10 +41,10 @@ function onEachFeatureDistrict(feature, layer) {
 	});
 }
 
-async function openDistrictsMap(stateName) {
+function openDistrictsMap(stateName) {
 	console.log(stateName);
 	let url = "./datasets/india/india_district/districts/js/" + stateName + ".js"
-	var script = await loadScript(url, callback);
+	loadScript(url, callback);
 }
 
 var callback = function () {
