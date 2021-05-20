@@ -1,5 +1,45 @@
 var district_geojson;
 var loaded = false;
+var districtBounds;
+
+function goToState() {
+	// console.log("go to india called");
+	map.fitBounds(districtBounds);
+}
+
+function zoomToFeatureDistrict(e) {
+	map.fitBounds(e.target.getBounds());
+}
+
+function resetHighlightDistrict(e) {
+	district_geojson.resetStyle(e.target);
+	info.update();
+}
+
+function highlightFeatureDistrict(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 2,
+		color: '#0000ff',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
+
+	info.update(layer.feature.properties);
+}
+
+function onEachFeatureDistrict(feature, layer) {
+	layer.on({
+		mouseover: highlightFeatureDistrict,
+		mouseout: resetHighlightDistrict,
+		click: zoomToFeatureDistrict,
+	});
+}
 
 async function openDistrictsMap(stateName) {
 	console.log(stateName);
@@ -32,8 +72,8 @@ function showMap(indianDistricts) {
 	if (loaded == true){map.removeLayer(district_geojson);}
 	district_geojson = L.geoJSON(indianDistricts, {
 		style: function (feature) {
-			return { weight: 1, color: "#ff0000" };
+			return { weight: 2, color: "#0000ff" };
 		},
-		onEachFeature: onEachFeature
+		onEachFeature: onEachFeatureDistrict
 	}).addTo(map);
 }

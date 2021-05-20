@@ -47,13 +47,13 @@ div{
 	cursor: pointer;
 }
 
-.go_to_india{
+.go_to_buttons{
   background-color: white;
   color: black;
   border: 2px solid #555555;
 }
 
-.go_to_india:hover {
+.go_to_buttons:hover {
   background-color: #555555;
   color: white;
 }

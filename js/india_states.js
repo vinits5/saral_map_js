@@ -21,6 +21,7 @@ info.update = function (props) {
 info.addTo(map);
 
 function zoomToFeature(e) {
+    districtBounds = e.target.getBounds();
     map.fitBounds(e.target.getBounds());
     var layer = e.target;
     openDistrictsMap(layer.feature.properties.NAME_1);
