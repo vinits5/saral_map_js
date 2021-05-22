@@ -1,21 +1,54 @@
 var village_geojson;
 var villageLoaded = false;
 var district_chosen;
+var village_loaded = false;
+
+function zoomToFeatureVillage(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+function resetHighlightVillage(e) {
+    village_geojson.resetStyle(e.target);
+    info.update();
+}
+
+function highlightFeatureVillage(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 2,
+        color: '#ffff00',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+
+    info.update(layer.feature.properties);
+}
+
+function onEachFeatureVillage(feature, layer) {
+    layer.on({
+        mouseover: highlightFeatureVillage,
+        mouseout: resetHighlightVillage,
+        click: zoomToFeatureVillage,
+    });
+}
 
 function openVillageMap(stateName, districtName) {
     console.log(districtName);
-    console.log(stateName);
     district_chosen = districtName;
     if (stateName == 'Bihar'){
-        let url = "./datasets/india/india_villages/js/" + stateName + ".js"
-        // loadVillageScript(url, villageCallBack);
+        let url = "./datasets/india/india_villages/js/" + stateName + "/" + districtName + ".js"
+        loadVillageScript(url, villageCallBack);
     }
 }
 
 var villageCallBack = function () {
-    // showVillageMap(indianVillages);
-    console.log(indianVillages);
-    // loaded = true;
+    showVillageMap(indianVillages);
+    village_loaded = true;
 };
 
 function loadVillageScript(url, callback) {
@@ -34,12 +67,12 @@ function loadVillageScript(url, callback) {
     head.appendChild(script);
 }
 
-function showVillageMap(indianDistricts) {
-    // if (loaded == true) { map.removeLayer(district_geojson); }
-    village_geojson = L.geoJSON(indianDistricts, {
+function showVillageMap(indianVillages) {
+    if (village_loaded == true) { map.removeLayer(village_geojson); }
+    village_geojson = L.geoJSON(indianVillages, {
         style: function (feature) {
-            return { weight: 2, color: "#0000ff" };
+            return { weight: 2, color: "#ff0000" };
         },
-        onEachFeature: onEachFeatureDistrict
+        onEachFeature: onEachFeatureVillage
     }).addTo(map);
 }

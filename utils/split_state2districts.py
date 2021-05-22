@@ -26,6 +26,6 @@ def split(input_file, output_dir):
         json.dump(new_json, new_file)
 
 
-input_file = 'datasets/india/india_villages/json/Bihar.json'
+input_file = 'datasets/india/india_villages/state_jsons/Bihar.json'
 output_dir = 'datasets/india/india_villages/json/Bihar/'
 split(input_file, output_dir)
