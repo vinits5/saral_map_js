@@ -9,6 +9,8 @@ function goToState() {
 
 function zoomToFeatureDistrict(e) {
 	map.fitBounds(e.target.getBounds());
+	var layer = e.target;
+	openVillageMap(layer.feature.properties.NAME_1, layer.feature.properties.NAME_2);
 }
 
 function resetHighlightDistrict(e) {
