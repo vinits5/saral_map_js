@@ -2,7 +2,7 @@ import os
 import json
 from json2js import json2js
 
-file = open('datasets/india/india_taluka/india_taluk.json', 'r')
+file = open('datasets/india/india_taluka/india_taluka_v1.json', 'r')
 data = json.load(file)
 
 # NAME_0: country

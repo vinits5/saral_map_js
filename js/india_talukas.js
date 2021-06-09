@@ -1,13 +1,89 @@
 var taluka_geojson;
 var district_chosen;
 var taluka_loaded = false;
+var highlighted_layers = [];
+
+function findLatLong(layer){
+    let latLongArray = layer.feature.geometry.coordinates[0];
+    latLong = [0, 0];
+    for(let i=0; i<latLongArray.length; i++){
+        latLong[0] += latLongArray[i][0];
+        latLong[1] += latLongArray[i][1];
+    }
+    latLong[0] = latLong[0]/latLongArray.length;
+    latLong[1] = latLong[1]/latLongArray.length;
+    return latLong
+}
+
+function highlightPenetratedTalukas(e) {
+    var layer = e.target;
+    population = layer.feature.properties.POPULATION;
+
+    layer.setStyle({
+        weight: 2,
+        color: '#ffffff',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    target_latlng = findLatLong(layer);
+
+    taluka_layers = taluka_geojson.getLayers();
+    taluka_layers_dist = [];
+
+    for(var i=0; i<taluka_layers.length; i++){
+        taluka_layers_latlng = findLatLong(taluka_layers[i]);
+        temp = Math.pow(taluka_layers_latlng[0] - target_latlng[0], 2) + 
+            Math.pow(taluka_layers_latlng[1] - target_latlng[1], 2);
+        taluka_layers_dist.push([i, Math.sqrt(temp)]);
+    }
+
+    taluka_layers_dist.sort(function (a, b){return a[1] - b[1]});
+    taluka_layers_dist = taluka_layers_dist.map(function (a) {return a[0]});
+
+    var highlight_layer_ids = [];
+    var total_population = 0;
+
+    for(let i=0; i<taluka_layers_dist.length; i++){
+        total_population += taluka_layers[taluka_layers_dist[i]].feature.properties.POPULATION;
+        if(total_population > 20000){
+            break;
+        }
+        else{
+            highlight_layer_ids.push(taluka_layers_dist[i]);
+        }
+    }
+    highlighted_layers = [];
+    for(let i=0; i<highlight_layer_ids.length; i++){
+        highlighted_layers.push(taluka_layers[i]);
+
+        taluka_layers[i].setStyle({
+            weight: 2,
+            color: '#ffffff',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+    }
+    
+}
 
 function zoomToFeatureTaluka(e) {
     map.fitBounds(e.target.getBounds());
+
+    for(let i=0; i<highlighted_layers.length; i++){
+        taluka_geojson.resetStyle(highlighted_layers[i]);
+    }
+
+    highlightPenetratedTalukas(e);
 }
 
 function resetHighlightTaluka(e) {
-    taluka_geojson.resetStyle(e.target);
+    var reset = 0;
+    for(let i = 0; i<highlighted_layers.length; i++){
+        if(e.target == highlighted_layers[i]){
+            reset = 1;
+        }
+    }
+    if(reset == 0){taluka_geojson.resetStyle(e.target);}
     info.update();
 }
 

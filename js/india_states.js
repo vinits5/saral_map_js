@@ -10,25 +10,26 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
+    let showInfo = '<h4>State Details</h4> Hover over a state<br />';
+
     if (props && props.NAME_1){
+        showInfo = '<h4>State Details</h4>' + 'State: <b>' + props.NAME_1 + '</b><br/>';
+        
         if (props.NAME_2){
-            this._div.innerHTML = '<h4>State Details</h4>' + 
-                                  'State: <b>' + props.NAME_1 + '</b><br/>' +
-                                  'District: <b>' + props.NAME_2 + '</b><br/>'
-        }
-        else{
-            this._div.innerHTML = '<h4>State Details</h4>' + 'State: <b>' + props.NAME_1 + '</b><br/>'
+            showInfo += 'District: <b>' + props.NAME_2 + '</b><br/>'
+            if (props.NAME_3) {
+                showInfo += 'Taluka: <b>' + props.NAME_3 + '</b><br/>'
+            }
         }
     }
+
     else if(props && props.STATE){
-        this._div.innerHTML = '<h4>State Details</h4>' +
+        showInfo = '<h4>State Details</h4>' +
                             'State: <b>' + props.STATE + '</b><br/>' +
                             'District: <b>' + props.DISTRICT + '</b><br/>' + 
                             'Village: <b>' + props.NAME + '</b><br/>'
     }
-    else{
-        this._div.innerHTML = '<h4>State Details</h4> Hover over a state<br /> Hover over a district <br/ >'
-    }
+    this._div.innerHTML = showInfo;
 };
 
 info.addTo(map);
