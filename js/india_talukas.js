@@ -115,11 +115,11 @@ function highlightFeatureTaluka(e) {
             dashArray: '',
             fillOpacity: 0.7
         });
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
     }
 
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
 
     info.update(layer.feature.properties);
 }
