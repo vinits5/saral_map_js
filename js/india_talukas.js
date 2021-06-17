@@ -57,12 +57,22 @@ function highlightPenetratedTalukas(e) {
     for(let i=0; i<highlight_layer_ids.length; i++){
         highlighted_layers.push(taluka_layers[highlight_layer_ids[i]]);
 
-        taluka_layers[highlight_layer_ids[i]].setStyle({
-            weight: 2,
-            color: '#ffffff',
-            dashArray: '',
-            fillOpacity: 0.7
-        });
+        if (i == 0){
+            taluka_layers[highlight_layer_ids[i]].setStyle({
+                weight: 2,
+                color: '#0f0f0f',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+        }
+        else{
+            taluka_layers[highlight_layer_ids[i]].setStyle({
+                weight: 2,
+                color: '#ffffff',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+        }
     }
     
 }
@@ -91,12 +101,21 @@ function resetHighlightTaluka(e) {
 function highlightFeatureTaluka(e) {
     var layer = e.target;
 
-    layer.setStyle({
-        weight: 2,
-        color: '#ffff00',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
+    var reset = 0;
+    for (let i = 0; i < highlighted_layers.length; i++) {
+        if (layer == highlighted_layers[i]) {
+            reset = 1;
+        }
+    }
+
+    if(reset == 0){
+        layer.setStyle({
+            weight: 2,
+            color: '#ffff00',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+    }
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
