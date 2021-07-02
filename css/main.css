@@ -1,7 +1,7 @@
 #map{
 	margin: auto;
 	width: 60%;
-	height: 70%;
+	height: 65%;
 	border: 3px solid #73AD21;
 	padding: 10px;
 }
@@ -56,4 +56,9 @@ div{
 .go_to_buttons:hover {
   background-color: #555555;
   color: white;
+}
+
+.ddList {
+	background-color: lightblue;
+	height: 30px;
 }

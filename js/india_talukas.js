@@ -2,6 +2,7 @@ var taluka_geojson;
 var district_chosen;
 var taluka_loaded = false;
 var highlighted_layers = [];
+var selected_taluka_layer;
 
 function findLatLong(layer){
     let latLongArray = layer.feature.geometry.coordinates[0];
@@ -15,7 +16,8 @@ function findLatLong(layer){
     return latLong
 }
 
-function highlightPenetratedTalukas(e) {
+function highlightPenetratedTalukas(e, population_limit, population_penetrated) {
+    selected_taluka_layer = e;
     var layer = e.target;
     population = layer.feature.properties.POPULATION;
 
@@ -44,13 +46,17 @@ function highlightPenetratedTalukas(e) {
     var total_population = 0;
 
     for(let i=0; i<taluka_layers_dist.length; i++){
-        total_population += taluka_layers[taluka_layers_dist[i][0]].feature.properties.POPULATION;
-        if(total_population > 20000){
+        if(total_population > population_limit){
             break;
         }
         else{
             highlight_layer_ids.push(taluka_layers_dist[i][0]);
         }
+        total_population += (taluka_layers[taluka_layers_dist[i][0]].feature.properties.POPULATION * population_penetrated)/10;
+    }
+
+    for(let i=0; i<highlighted_layers.length; i++){
+        taluka_geojson.resetStyle(highlighted_layers[i]);
     }
 
     highlighted_layers = [];
@@ -84,7 +90,12 @@ function zoomToFeatureTaluka(e) {
         taluka_geojson.resetStyle(highlighted_layers[i]);
     }
 
-    highlightPenetratedTalukas(e);
+    select_dom = document.getElementById('custom-select');
+    var population_limit = (parseInt(select_dom.options[select_dom.selectedIndex].value));
+    select_dom = document.getElementById('population-penetrated');
+    var population_penetrated = (parseInt(select_dom.options[select_dom.selectedIndex].value));
+
+    highlightPenetratedTalukas(e, population_limit, population_penetrated);
 }
 
 function resetHighlightTaluka(e) {

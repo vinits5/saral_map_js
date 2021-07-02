@@ -4,12 +4,12 @@
 		<meta content="utf-8" http-equiv="encoding">
 		<title>A Leaflet map!</title>
 		<link rel="stylesheet" href="./css/main.css">
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+		<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script> -->
 		
 		<!-- Uncomment below 2 lines only for local libs if you don't have internet. -->
-		<!-- <link rel="stylesheet" href="./leaflet/leaflet.css"/> -->
-		<!-- <script src="./leaflet/leaflet.js"></script> -->
+		<link rel="stylesheet" href="./leaflet/leaflet.css"/>
+		<script src="./leaflet/leaflet.js"></script>
 		
 		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 		<!-- <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script> -->
@@ -18,7 +18,24 @@
 	<body>
 		<h2 class="heading">Leaflet Map</h2>
 		<h2></h2>
-		<div id="map"></div>
+		<div>
+			<div id="map"></div>
+			<br/>
+			<select id="custom-select" class="ddList" style="width:200px">
+				<option value=5700>Swach-Micro</option>
+				<option value=17000>Swach-1.3</option>
+				<option value=30000>Swach-3.2</option>
+				<option value=132000>Swach-4.2</option>
+				<option value=285000>Swach-5.0</option>
+			</select>
+			<select id="population-penetrated" class="ddList" style="width:200px">
+				<option value=10>10</option>
+				<option value=20>20</option>
+				<option value=30>30</option>
+				<option value=40>40</option>
+				<option value=50>50</option>
+			</select>
+		</div>
 		
 		<script src="./js/map.js"></script>
 		<script src="./datasets/india/india_state/india_state.js"></script>
@@ -27,11 +44,13 @@
 		<script src="./js/india_districts.js"></script>
 		<script src="./js/india_states.js"></script>
 		<script src="./js/go_to_india.js"></script>
-
+		<script src="./js/change_machine.js"></script>
+		
 		<div>
-			<h2></h2>
+			<br/>
 			<button class="button go_to_buttons" type="button" onclick="goToIndia()">Go To India</button>
 			<button class="button go_to_buttons" type="button" onclick="goToState()">Selected State</button>
+			<button class="button go_to_buttons" type="button" onclick="changeMachine()">Change Settings</button>
 		</div>
 		
 	</body>

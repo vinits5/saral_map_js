@@ -19,6 +19,7 @@ info.update = function (props) {
             showInfo += 'District: <b>' + props.NAME_2 + '</b><br/>'
             if (props.NAME_3) {
                 showInfo += 'Taluka: <b>' + props.NAME_3 + '</b><br/>'
+                showInfo += 'Population: <b>' + props.POPULATION + '</b><br/>'
             }
         }
     }

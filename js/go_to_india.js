@@ -4,4 +4,5 @@ function goToIndia() {
     map.removeLayer(district_geojson);
     // map.removeLayer(village_geojson);
     map.removeLayer(taluka_geojson);
+    taluka_loaded = false;
 }
