@@ -34,7 +34,7 @@ var machineLocations = [
     { "name": "ARKA INITIATIVE", "place": "Colombo", "lat": 6.9271, "lon": 79.8612, "State": "Sri Lanka" },
     { "name": "Action India", "place": "Hapur", "lat": 26.4184, "lon": 83.3188, "State": "Uttar Pradesh" },
     { "name": "KSCF", "place": "Virat Nagar", "lat": 27.4310, "lon": 76.1900, "State": "Rajasthan" },
-    { "name": "PRIDE ODHISA", "place": "Kurda", "lat": 20.1863°, "lon": 85.6223, "State": "Odisha" },
+    { "name": "PRIDE ODHISA", "place": "Kurda", "lat": 20.1863, "lon": 85.6223, "State": "Odisha" },
     { "name": "", "place": "", "lat": , "lon": , "State": "" },
     { "name": "", "place": "", "lat": , "lon": , "State": "" },
 ]
