@@ -1,9 +1,9 @@
 var machineLocations = [
     { "name": "Shri Sai Hygiene", "place": "Madurai", "lat": 9.9252, "lon": 78.1198, "State": "Tamil Nadu" },
-    { "name": "Desai Foundation", "place": "Valsad", "lat": 20.5992, "lon": 72.9342, "State": "Gujrat" },
-    { "name": "Piriprote Lab", "place": "Talaja", "lat": 21.3514, "lon": 72.0327, "State": "Gujrat" },
+    { "name": "Desai Foundation", "place": "Valsad", "lat": 20.5992, "lon": 72.9342, "State": "Gujarat" },
+    { "name": "Piriprote Lab", "place": "Talaja", "lat": 21.3514, "lon": 72.0327, "State": "Gujarat" },
     { "name": "Rajeshthani Mahila Mandal", "place": "Worli", "lat": 18.9986, "lon": 72.8174, "State": "Maharashtra" },
-    { "name": "Sakhi Foundation", "place": "Visnagar", "lat": 21.3514, "lon": 72.0327, "State": "Gujrat" },
+    { "name": "Sakhi Foundation", "place": "Visnagar", "lat": 21.3514, "lon": 72.0327, "State": "Gujarat" },
     { "name": "Suman Industries", "place": "Latur", "lat": 18.4088, "lon": 76.5604, "State": "Maharashtra" },
     { "name": "Kalashree Healthcare", "place": "Bhor", "lat": 18.1458, "lon": 73.8430, "State": "Maharashtra" },
     { "name": "HEALING FIELDS", "place": "Buxar", "lat": 25.5647, "lon": 83.9777, "State": "Bihar" },
@@ -11,15 +11,15 @@ var machineLocations = [
     { "name": "J.C.B", "place": "Kamrup", "lat": 26.3161, "lon": 91.5984, "State": "Assam" },
     { "name": "SPYM", "place": "Palwal", "lat": 28.1473, "lon": 77.3260, "State": "Haryana" },
     { "name": "Stylish Lady", "place": "Kurukshetra", "lat": 29.9695, "lon": 76.8783, "State": "Haryana" },
-    { "name": "CED Society", "place": "Dehradun", "lat": 30.3791, "lon": 78.1051, "State": "Uttarakhan" },
+    { "name": "CED Society", "place": "Dehradun", "lat": 30.3791, "lon": 78.1051, "State": "Uttaranchal" },
     { "name": "Chechay Sanitary Pads", "place": "Timphu", "lat": 27.4712, "lon": 89.6339, "State": "Bhutan" },
     { "name": "Christian", "place": "Kigali", "lat": 1.9441, "lon": 30.0619, "State": "Rwanda" },
     { "name": "Anandwan", "place": "Chandrapur", "lat": 19.9615, "lon": 79.2961, "State": "Maharashtra" },
-    { "name": "Gram Vikas Trust", "place": "Baruch", "lat": 21.7051, "lon": 72.9959, "State": "Gujrat" },
+    { "name": "Gram Vikas Trust", "place": "Baruch", "lat": 21.7051, "lon": 72.9959, "State": "Gujarat" },
     { "name": "JS Emphasis", "place": "Ludhiana", "lat": 30.9010, "lon": 75.8573, "State": "Punjab" },
     { "name": "Agricultural Development Trust", "place": "Baramati", "lat": 18.1792, "lon": 74.6078, "State": "Maharashtra" },
     { "name": "Commissioner", "place": "Dungarpur", "lat": 23.8417, "lon": 73.7147, "State": "Rajasthan" },
-    { "name": "Siiveri Padmavati", "place": "Karimnagar", "lat": 18.4386, "lon": 79.1288, "State": "Telangana" },
+    { "name": "Siiveri Padmavati", "place": "Karimnagar", "lat": 18.4386, "lon": 79.1288, "State": "Andhra Pradesh" },
     { "name": "Shubhamkaroti Foundation", "place": "Nanded", "lat": 19.1383, "lon": 77.3210, "State": "Maharashtra" },
     { "name": "Walson Industries", "place": "Nashik", "lat": 19.9975, "lon": 73.7898, "State": "Maharashtra" },
     { "name": "Kudos Hygeine Products", "place": "Chitradurga", "lat": 14.2251, "lon": 76.3980, "State": "Karnataka" },
@@ -34,12 +34,27 @@ var machineLocations = [
     { "name": "ARKA INITIATIVE", "place": "Colombo", "lat": 6.9271, "lon": 79.8612, "State": "Sri Lanka" },
     { "name": "Action India", "place": "Hapur", "lat": 26.4184, "lon": 83.3188, "State": "Uttar Pradesh" },
     { "name": "KSCF", "place": "Virat Nagar", "lat": 27.4310, "lon": 76.1900, "State": "Rajasthan" },
-    { "name": "PRIDE ODHISA", "place": "Kurda", "lat": 20.1863, "lon": 85.6223, "State": "Odisha" },
+    { "name": "PRIDE ODHISA", "place": "Kurda", "lat": 20.1863, "lon": 85.6223, "State": "Orissa" },
 ]
 
 var markers = [];
 var machineDisplayState = false;
 var functionCallCount = 0
+
+function showStateMachines(){
+    for(let i=0; i<machineLocations.length; i++){
+        if(machineLocations[i].State == stateSelectedName){
+            markers[i].addTo(map);
+        }
+    }
+}
+
+function showAllMachines(){
+    for(let i=0; i<machineLocations.length; i++){
+        markers[i].addTo(map);
+    }
+}
+
 function showMachines(){
     if(functionCallCount == 0){
         for (let i = 0; i < machineLocations.length; i++) {
@@ -49,8 +64,12 @@ function showMachines(){
         }
     }
     if(!machineDisplayState){
-        for(let i=0; i<machineLocations.length; i++){
-            markers[i].addTo(map);
+        console.log('stateSelected', stateSelected)
+        if(stateSelected){
+            showStateMachines();
+        }
+        else{
+            showAllMachines();
         }
         machineDisplayState = true;
     }

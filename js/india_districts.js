@@ -1,6 +1,8 @@
 var district_geojson;
 var loaded = false;
 var districtBounds;
+var stateSelected = false;
+var stateSelectedName;
 
 function goToState() {
 	// console.log("go to india called");
@@ -46,6 +48,8 @@ function onEachFeatureDistrict(feature, layer) {
 
 function openDistrictsMap(stateName) {
 	console.log(stateName);
+	stateSelected = true;
+	stateSelectedName = stateName;
 	let url = "./datasets/india/india_district/districts/js/" + stateName + ".js"
 	loadScript(url, callback);
 }
