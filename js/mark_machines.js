@@ -60,7 +60,7 @@ function showMachines(){
         for (let i = 0; i < machineLocations.length; i++) {
             marker = new L.marker([machineLocations[i].lat, machineLocations[i].lon]);
             markers.push(marker);
-            marker.bindPopup(machineLocations[i].place);
+            marker.bindPopup(machineLocations[i].name + ", " + machineLocations[i].place);
         }
     }
     if(!machineDisplayState){
