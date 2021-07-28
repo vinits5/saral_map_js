@@ -1,7 +1,7 @@
 import json
 import os
 
-file = open('datasets/india/india_district/india_district.json', 'r')
+file = open('datasets/india/india_district/india_district_v2.json', 'r')
 
 output_dir = 'datasets/india/india_district/districts/json/'
 if not os.path.exists(output_dir): os.makedirs(output_dir)

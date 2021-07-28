@@ -1,5 +1,7 @@
 echo "Dataset generation begins!"
 
+python3 utils/modify_geojson_names.py
+
 python3 utils/json2js_state.py
 
 python3 utils/split_india2states.py
